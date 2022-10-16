@@ -1,0 +1,94 @@
+
+
+Comandi shell:
+
+ps aux : Restituisce tutti i preocessi in esecuzione con tutte le informazioni
+		riguardanti lo stato del processo (esecuzione, sleep, zombie, etc)
+		
+ps : restituisce i processi in esecuzione
+
+ps u : ???
+
+pwd : Restituisce l'indirizzo corrente
+
+top : Lista che viene aggiornata periodicamente sull'utilizzo delle risorse e dei processi
+
+vim : editor testuale <vim nomeFile.c> per uscire e salvare basta digitare ":wq"
+
+mkdir : crea una directory
+
+gcc -o nomeOutput nomeSorgente.c : Compilazione del sorgente
+
+__________________________________________________________________________________________________
+
+permessi sui file:
+
+primo byte - indica il tipo di file (d per directory, etc.)
+		i successivi sono terne
+
+prima terna -del proprietario. permessi di r-lettura, w-scrittura, x-esecuzione
+
+seconda terna - gruppo dove è compreso il proprietario
+
+terza terna - tutti gli altri utenti del sistema
+
+chmod - modifica i permessi (-x rimuovi permesso esecuzione)(+x aggiunge permesso esecuzione)
+	chmod 664 prova.c (i numeri sono in codifica ottale, 6=110 4=100, quindi tale file ha
+	permessi in lettura e scrittura per utente e gruppo e sola lettura per tutti.
+
+__________________________________________________________________________________________________
+
+gestione file:
+
+cp : copia (sintassi - cp prova.c prova2.c)
+
+cat : mostra il contenuto
+
+mv : rinominare un file
+	(sintassi - mv prova.c prova2.c (in realtà sposta il file prova.c in prova2.c))
+
+mv : muovere un file in una directory (sintassi - mv prova.c destinazione/)
+
+rm : cancellazione (-f forza la rimozione di un file)(-fr forza ricorsivamente)
+	è possibile utilizzare il comando senza flag per cancellare un file
+	dobbiamo utilizzare il flag -r per cancellare una directory
+
+echo : manda in output la stringa tra le gli apici
+
+echo 'test' > echo_test : crea un file chiamato echo_test ed inserisce la stringa test
+				per continuare a scrivere (append) bisogna usare >>
+
+sort : ordinamento ascendente
+
+| : operatore pipe permette di concatenare serie di comandi. L'output del comando a sinistra
+	andrà in input al comando a destra
+
+cat echo_test | sort : ordina in output un file ma senza modificarlo
+
+wc -l : conta le righe che compongono un file
+
+cat echo_test | sort > echo_test_sort : Salva il file ordinato in un altro file
+					gedit nomeFile.c : aprire il file nell'editor di testo
+
+./nomeCartella : il punto è visto dalla shell come cartella corrente
+
+../nomeCartella : il doppio punto è visto dalla shell come cartella preceddednte
+
+ls -l -a : il flag -a serve a mostrare TUTTO il contenuto della cartella, comprese
+		quelle nascoste 
+
+touch nomeFile.c : Va a "toccare" il file. Praticamente aggiorna la data di modifica senza dover aprire il file
+
+grep : filtraggio
+	ls | grep *.a -> lista tutti i file che finiscono per .a
+	
+env : mostra le variabili d'ambiente
+	
+export : Aggiungi una variabile d'ambiente temporanea al sistema
+
+nice : serve per cambiare la priorità di un processo. Possiamo aumentare il valore (abbassare la priorità) 
+	senza i premessi di root mentre per diminuire il valore (alzando la priorità - passando valori negativi)
+	dobbiamo avere i permessi di root
+
+getpid : 
+

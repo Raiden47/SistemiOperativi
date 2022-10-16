@@ -1,0 +1,154 @@
+
+
+Utilizzare g++ per codici sorgente in linguaggio C++
+Utilizzare gcc per codici sorgente in linguaggio C
+
+COMPILAZIONE:
+
+gcc -o nomeOutput nomeSorgente.c 
+	Compila il sorgente e ne crea un output
+	
+gcc -c nomeFile.c 
+	Compila il sorgente ed emette come output il modulo oggetto
+	
+gcc -o nomeOutput nomeOgetto1.o nomeOgetto2.0 
+	Compile i moduli oggetto e li crea un unico eseguibile composto da tutti 
+	i moduli
+	
+Per eseguire un programma in background basta aggiungere &
+./nomeEseguibile &
+	
+	
+ELF (EXECUTABLE AND LINKABLE FORMAT):
+Ci permette di vedere i file .o
+
+objdump - Reverse elf binary file 
+	-f 		mostra i contenuti del file header
+	-p 		mostra i contenuti specifici del file
+	-d 		mostra i contenuti in linguaggio macchina
+	-x 		mostra i contenuti di tutti gli header
+	
+	
+MAKEFILE:
+
+make - Crea un "Makefile"
+	-f nomeMakefile		interpreta il makefile 
+	
+make nomeFile.o
+	Compila solo il file assegnato
+	
+make clear
+	Regola per ripulire i risultati di compilazione 
+	
+
+MACRO IN MAKEFILE:
+
+MACRO = valore
+	Definisce una variabile macro di un dato valore
+	
+$(MACRO) 
+	Uso della variabile macro nel makefile 
+	
+
+LIBRERIA STATICA:
+- Sono collecate in fase di collegamento -
+
+NB -> Quando si crea una libreria il nome deve cominciare con lib
+
+ar rcs libnomeLibreria.a file1.o file2.o
+	r -> Inserisce il file con rimpiazzo 
+	c -> Crea la libreria se non esiste
+	s -> Crea un indice oggetto-file
+	Il comando così scritto permette di creare una libreria utilizzando i 
+	due moduli oggetto come input
+	
+gcc -o eseguibile nomeFile1.o nomeFile2.o -L/path/ -lnomeLib
+	-L Indica il path dove si trova la directory (se si trova nella 
+	stessa directory ./)
+	-l Indica il nome della directory (epurato dal prefisso lib e 
+	dal suffisso .a)
+	
+gcc -o eseguibile nomeFile.c --static
+	Crea un eseguibile con le librerie di sistema pre-caricate (staticamente)
+	
+LIBRERIA DINAMICA (shared library):
+- Sono collegate in fase di caricamento -
+
+gcc -shared -WL,-soname,libnomeLib.so -o libnomeLib.so file1.o file2.o
+	-shared		Indica al compilatoreche si vuole creare uno shared object
+	-WL		Passa opzioni al linker
+	-o		Nome da dare al file che contiene la shared library
+
+Compilazione dei file di libreria 
+	-fpic		Opzione per generare coddice rilocabile (Position 
+			Indipendent Code)
+	
+gcc -o eseguibile nomeFile1.o nomeFile2.o -L/path/ -lnomeLib
+	-L Indica il path dove si trova la directory (se si trova nella 
+	stessa directory ./)
+	-l Indica il nome della directory (epurato dal prefisso lib e 
+	dal suffisso .a)
+	
+LD_LIBRARY_PATH: export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:/path
+	Aggiunggere la libreria alle variabili d'ambiente per localizzarla
+	in fase di caricamento
+	
+ldd nomeEseguibile
+	Permette di vedere di quali librerie dinamiche il programma necessita
+
+
+GNU DEBUGGER
+
+Text Unit Interface attivabile tramite CTRL+X, CTRL+A
+Compilare il file che vogliamo debuggare con il flag -g
+
+gdb -args nomeFile
+
+Comandi del debugger
+	file 			->	Seleziona il file da debuggare
+	run(r) 			->	Esegue il file 
+	attach <npid>		->	Gdb si attacca al processo con pid npid
+	kill			->	Uccide il processo che si sta debuggando
+	quit			->	Uscita dal debugger
+	
+Esecuzione step by step
+	c(ontinue)		->	Continua l'esecuzione fino al prossimo stop
+	s(tep)			->	Esegue una linea di codice, entrando nella chiamata 
+					a funzione se la funziona è una call
+	n(ext)			->	Esegue una linea di codice senza entrare nella chiamata
+					a funzione se una linea è una call
+	finish			-> 	Termina l'esecuzione della call
+	
+Breakpoint
+	b(reak)			-> 	Imporsta un breakpoint alla linea di codice
+	whatch <expr>		->	Trigger quando expr è letto o scritto
+	info break		->	Lista i breakpoints
+	clear <pos> 		->	Elimina un breakpoint alla posizione pos
+	delete <num>		->	Elimina un breakpoint usando il numero
+
+Comandi per ricercare e stampare
+	list <pos>		->	Stampa la linea di codice nella posizione pos
+	search <regexp>		->	Ricerca i punti del codice che soddisfano l'espressione
+					regolare regexp
+	backtrace		->	Stampa lo stacktrace fino a quel punto
+	info <var,fun>		->	Stampa informazioni su variabili e funzioni
+	print <expr>		->	Stampa la valutazione dell'espressione expo
+
+Comandi per modificare dati e control path
+	set <name> <expr>	->	Cambia i valore di una variabile
+	return <expr>		->	Forza il valore di ritorno ad expr della funzionecorrente
+	jump <pos>		->	Fa saltare l'esecuzione a pos
+	
+UCCIDERE UN PROCESSO 
+
+kill -9 <idPid>
+
+ENTRARE NELLA CARTELLA DEI PROCESSI
+
+/proc 
+
+Prossiamo usare /proc per vedere il contenuto di un processo 
+cat /proc/numPID/sched
+
+
+
