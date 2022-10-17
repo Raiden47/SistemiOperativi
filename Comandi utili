@@ -90,5 +90,5 @@ nice : serve per cambiare la priorità di un processo. Possiamo aumentare il val
 	senza i premessi di root mentre per diminuire il valore (alzando la priorità - passando valori negativi)
 	dobbiamo avere i permessi di root
 
-getpid : 
+
 
