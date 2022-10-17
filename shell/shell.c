@@ -18,6 +18,11 @@ int main (){
 	while (1){
 		printf ("Shell>");
 		scanf("%s",s);
+		printf("%d",(int)strlen(s));
+		//fgets(__,__,__) al posto di scanf
+		argv[i] = s;
+		i += 1;
+		
 		
 		/*
 		while (s != '\0'){
