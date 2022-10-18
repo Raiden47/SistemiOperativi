@@ -7,14 +7,32 @@
 
 #define N 100
 
+typedef char string [N];
+
 int main (){
 
-	char argv[N];
+	string s;
+	string argv[N];
+	int i = 0;
 	
 	while (1){
 		printf ("Shell>");
-		scanf("%s",argv);
-		printf("%s\n",argv);
+		scanf("%s",s);
+		
+		/*
+		while (s != '\0'){
+			//strcpy(s, argv[i]);
+			//argv[i] = s;
+			//i += 1;
+			
+		}
+		*/
+		
+		
+//		printf("%s\n",s);
+		
+		
+		sleep(1);
 	}
 	return 0;
 }
