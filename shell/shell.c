@@ -16,6 +16,7 @@ int main (){
 	int argc;
 
 	int pid;
+	int st;
 
 	while (1) {
 		printf("Shell> ");
@@ -41,17 +42,21 @@ int main (){
 			return -1;
 		} else if (pid == 0) {
 			//processo figlio
-			char *path = "/bin/";
-
-			execv(strcat(path, argv[0]),argv);
-			//execvp(argv[0],argv);
+			// char *path = "/bin/";
+			// // printf("%s\n", strcat(path,argv[0]));
+			// execv(strcat(path, argv[0]),argv);
+			execvp(argv[0],argv);
 			fprintf(stderr,"Exec fallita\n");
-
+			// sleep(10);
 			_exit(1);
 		} else if (pid > 0) {
 			//processo padre
-			wait (NULL);
-			printf("Esecuzione del comando terminata!\n");
+			wait (&st);
+			printf("Esecuzione del comando terminata ");
+			if ((char)st==0)
+				printf("con stato: %d\n\n",st>>8);
+			else
+				printf("involontariamente!\n\n");
 		}
 
 		argc = 0;
