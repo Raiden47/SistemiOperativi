@@ -13,7 +13,9 @@ int main (){
 	char *token;
 	char *argv [N];
 
-	int argc;
+	char *path = "/bin/ls";
+
+	int argc = 0;
 
 	int pid;
 	int st;
@@ -28,11 +30,19 @@ int main (){
 
 		//tokenizzazione del comando da shell
 		while (token != NULL) {
-			argv[argc] = token;
+			// argv[argc] = token;
+			strcpy(argv[argc], token);
 			printf("argv[%d] = %s\n", argc,argv[argc]);
 			argc += 1;
 			token = strtok(NULL, " ");
 		}
+
+		//inserisce null in ultima posizione
+		// argv[argc] = NULL;
+		// printf("Stampo il comando per intero dall'array\n\t");
+		// for (int i = 0 ; i < argc ; i++)
+		// 	printf("[%d]%s ",i,argv[argc]);
+		// printf("\n");
 
 		//creazione di un processo
 		pid = fork ();
@@ -42,15 +52,13 @@ int main (){
 			return -1;
 		} else if (pid == 0) {
 			//processo figlio
-			// char *path = "/bin/";
-			// // printf("%s\n", strcat(path,argv[0]));
-			// execv(strcat(path, argv[0]),argv);
+			// execv(path,argv);
 			execvp(argv[0],argv);
 			fprintf(stderr,"Exec fallita\n");
-			// sleep(10);
 			_exit(1);
 		} else if (pid > 0) {
 			//processo padre
+			sleep(20);
 			wait (&st);
 			printf("Esecuzione del comando terminata ");
 			if ((char)st==0)
