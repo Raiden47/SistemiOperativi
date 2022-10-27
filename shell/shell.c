@@ -5,11 +5,11 @@
 #include <sys/wait.h>
 #include <string.h>
 
-#define N 128
+#define N 256
 
 int main (){
 
-	char cmd [N];
+	char cmd[N];
 	char *token;
 	char *argv [N];
 
@@ -30,8 +30,8 @@ int main (){
 
 		//tokenizzazione del comando da shell
 		while (token != NULL) {
-			// argv[argc] = token;
-			strcpy(argv[argc], token);
+			argv[argc] = token;
+			// strcpy(argv[argc], token);
 			printf("argv[%d] = %s\n", argc,argv[argc]);
 			argc += 1;
 			token = strtok(NULL, " ");
@@ -40,10 +40,10 @@ int main (){
 		//inserisce null in ultima posizione
 		// argv[argc] = NULL;
 		// printf("Stampo il comando per intero dall'array\n\t");
-		// for (int i = 0 ; i < argc ; i++)
-		// 	printf("[%d]%s ",i,argv[argc]);
+		for (int i = 0 ; i < argc ; i += 1)
+			printf("[%d]%s \n",i,argv[i]);
 		// printf("\n");
-
+/*
 		//creazione di un processo
 		pid = fork ();
 
@@ -65,8 +65,7 @@ int main (){
 				printf("con stato: %d\n\n",st>>8);
 			else
 				printf("involontariamente!\n\n");
-		}
-
+*/
 		argc = 0;
 		sleep(1);
 	}
