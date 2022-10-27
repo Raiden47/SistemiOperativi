@@ -14,8 +14,10 @@ int main (){
 	char *argv [N];
 
 	char *path = "/bin/ls";
+	char *lib;
 
 	int argc = 0;
+	int cont;
 
 	int pid;
 	int st;
@@ -28,22 +30,35 @@ int main (){
 
 		token = strtok(cmd, " ");
 
+		//creo il path
+		// strcat(path,token);
+		// printf("il path e': %s", path);
+
 		//tokenizzazione del comando da shell
+		cont = 0;
+		argv[0]=NULL;
 		while (token != NULL) {
-			argv[argc] = token;
 			// strcpy(argv[argc], token);
-			printf("argv[%d] = %s\n", argc,argv[argc]);
-			argc += 1;
+			if (cont > 0){
+				argv[argc] = token;
+				printf("argv[%d] = %s\n", argc,argv[argc]);
+				argc += 1;
+			} else
+				lib = token;
+			cont += 1;
 			token = strtok(NULL, " ");
+
 		}
 
 		//inserisce null in ultima posizione
-		// argv[argc] = NULL;
+		argv[argc] = NULL;
+		// argc += 1;
 		// printf("Stampo il comando per intero dall'array\n\t");
+		printf("\n[lib] %s\n", lib);
 		for (int i = 0 ; i < argc ; i += 1)
 			printf("[%d]%s \n",i,argv[i]);
 		// printf("\n");
-/*
+
 		//creazione di un processo
 		pid = fork ();
 
@@ -53,23 +68,23 @@ int main (){
 		} else if (pid == 0) {
 			//processo figlio
 			// execv(path,argv);
-			execvp(argv[0],argv);
+			execvp(lib,argv);
 			fprintf(stderr,"Exec fallita\n");
 			_exit(1);
 		} else if (pid > 0) {
 			//processo padre
-			sleep(20);
+			sleep(1);
 			wait (&st);
 			printf("Esecuzione del comando terminata ");
 			if ((char)st==0)
 				printf("con stato: %d\n\n",st>>8);
 			else
 				printf("involontariamente!\n\n");
-*/
+
 		argc = 0;
 		sleep(1);
 	}
+}
 
-
-	return 0;
+return 0;
 }
