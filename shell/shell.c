@@ -70,7 +70,7 @@ int main (){
 		} else if (pid == 0) {
 			//processo figlio
 			// execv(path,argv);
-			execvp(lib,argv);
+			execvp(argv[0],argv);
 			fprintf(stderr,"Exec fallita\n");
 			_exit(1);
 		} else if (pid > 0) {
