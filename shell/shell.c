@@ -13,7 +13,7 @@ int main (){
 	char *token;
 	char *argv [N];
 
-	char *path = "/bin/ls";
+	char *path = "/bin/";
 	char *lib;
 
 	int argc = 0;
@@ -30,29 +30,31 @@ int main (){
 
 		token = strtok(cmd, " ");
 
-		//creo il path
+		// creo il path
 		// strcat(path,token);
 		// printf("il path e': %s", path);
 
 		//tokenizzazione del comando da shell
-		cont = 0;
+		// cont = 0;
 		argv[0]=NULL;
 		while (token != NULL) {
-			// strcpy(argv[argc], token);
-			if (cont > 0){
-				argv[argc] = token;
-				printf("argv[%d] = %s\n", argc,argv[argc]);
-				argc += 1;
-			} else
+			if (argc == 0){
 				lib = token;
-			cont += 1;
+				// strcat(path,token);
+				// printf("%s\n", path);
+			}
+			argv[argc] = token;
+			printf("argv[%d] = %s\n", argc,argv[argc]);
+			argc += 1;
+
+			// cont += 1;
 			token = strtok(NULL, " ");
 
 		}
 
 		//inserisce null in ultima posizione
 		argv[argc] = NULL;
-		// argc += 1;
+		argc += 1;
 		// printf("Stampo il comando per intero dall'array\n\t");
 		printf("\n[lib] %s\n", lib);
 		for (int i = 0 ; i < argc ; i += 1)
