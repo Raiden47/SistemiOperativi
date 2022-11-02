@@ -1,8 +1,0 @@
-
--- Rimuovere le risorse dopo che sono state allocate --
-
-ipcs <-m |-s |-q>
-	Visualizza tutte le strutture allocate
-
-ipcrm <shm | sem | msg> <IPC_IS>
-	Rimuove una struttura specifica
