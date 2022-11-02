@@ -28,7 +28,7 @@ int main (){
 		//input dell'intera stringa
 		fgets(cmd,N,stdin);
 
-		token = strtok(cmd, " ");
+		token = strtok(cmd, " \n");
 
 		// creo il path
 		// strcat(path,token);
@@ -48,7 +48,7 @@ int main (){
 			argc += 1;
 
 			// cont += 1;
-			token = strtok(NULL, " ");
+			token = strtok(NULL, " \n");
 
 		}
 
