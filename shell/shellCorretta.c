@@ -30,7 +30,6 @@ int main (){
 
 		// rimuovo l'a capo finale di quando premo invio
 		cmd[strcspn(cmd, "\r\n")] = 0;
-    printf("%s\n", cmd);
 
 		//resetto il numero di argomenti che ricevo in input quando
 		// premo invio per il comando
