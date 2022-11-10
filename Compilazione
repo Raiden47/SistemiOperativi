@@ -49,6 +49,13 @@ MACRO = valore
 $(MACRO) 
 	Uso della variabile macro nel makefile 
 	
+-DDEBUG : Risolve il nome DEBUG in un programma in modo da abilitare le 
+		  sezioni di debug. 
+	Sintassi:
+		  #ifdef DEBUG_
+		  		<Codice da racchiudere all'interno della sezione
+		  #endif
+		  	
 
 LIBRERIA STATICA:
 - Sono collecate in fase di collegamento -
