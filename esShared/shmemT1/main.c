@@ -39,11 +39,14 @@ int main () {
     perror ("\n<--- ERRORE SHMGET [2]--->");
     exit(1);
   }
+  *p = 111;
 
   printf("Dettagli shared memory creata:\n");
   printf("...Chiave IPC shm: %d\n", k);
   printf("...Descrittore shm: %d\n", shm);
-  printf("...indirizzo dopo l'attach: %p\n", p);
+  printf("...Inizializzazione shm: %d\n", *p);
+  printf("...Indirizzo dopo l'attach: %p\n", p);
+
 
   key_t pid = fork();
 
