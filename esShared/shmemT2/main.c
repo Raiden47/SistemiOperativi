@@ -48,6 +48,7 @@ int main(){
       printf("<-- Valore attuale della variabile condivisa: [%d]\n", *p);
       printf("<-- Cambio il valore della variabile condivisa con [%d]\n", temp);
       *p = temp;
+      sleep(1);
       exit(0);
     }else if (pid > 0){
       wait (NULL);
