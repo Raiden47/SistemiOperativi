@@ -11,8 +11,8 @@ int main(int argc,char*argv[])
 {
 	int i;
 	/*Richiesta code di messaggi IPC*/
-	msgq_guest = /*TODO*/;
-	msgq_print = /*TODO*/;; 
+	msgq_guest = msgget(IPC_PRIVATE, IPC_CREAT | 0664);
+	msgq_print = msgget(IPC_PRIVATE, IPC_CREAT | 0664); 
 
 	/*Creazione processo 'printer'*/
 	//TODO
@@ -28,7 +28,7 @@ int main(int argc,char*argv[])
 
 	/*Invio messaggio di terminazione al server*/
 	//TODO
-	
+
 	/*Attesa terminazione processi 'server' e 'printer'*/
 	for(i=0; i<2; i++)
 		wait(0);

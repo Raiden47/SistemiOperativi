@@ -7,9 +7,9 @@
 #include <stdio.h>
 #include <unistd.h>
 
-#define QUEUE 1
-#define PRINTER 2
-#define CLIENT 3
+#define QUEUE_REQ 1
+#define PRINT_REQ 2
+#define SERVER_REQ 3
 
 #define BUFFER_DIM 10
 typedef pid_t buf[BUFFER_DIM];
