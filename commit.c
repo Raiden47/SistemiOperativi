@@ -5,6 +5,7 @@
 
 int main (int argc, char *argv[]){
 
+  printf("Messaggio da stampare inserire con il commit >> %s\n\n\n", argv[1]);
   execlp("ls", "ls", "-l", NULL);
   perror("errore 0");
   execlp("git", "git", "add", "--all", NULL);
