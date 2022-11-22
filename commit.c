@@ -9,7 +9,9 @@ int main (int argc, char *argv[]){
   int st;
 
   for (int i = 0 ; i < 3 ; i++){
-
+	
+	sleep(1);
+	
     //Create a new process
     pid = fork();
     if (pid == 0 && i == 0){

@@ -1,7 +1,7 @@
 all: sem
 
 sem: main.o semaphore.o
-	gcc -o main.o semaphore.o
+	gcc -o sem main.o semaphore.o
 
 main.o:	main.c semaphore.h
 	gcc -c main.c -o main.o
