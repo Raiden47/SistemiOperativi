@@ -26,7 +26,7 @@ int main(){
     _exit(1);
   }
 
-  int *sh_bff = (int*) shmat(shm, NULL, 0);
+  int *sh_bff = shmat(shm, NULL, 0);
 
   if (sh_bff == (void*)-1){
     perror("Errore SHMAT");
@@ -35,6 +35,7 @@ int main(){
 
   //---Inizializzo la shared memory al primo valore dell'array
   *sh_bff = vett[0];
+  printf("|--- Valore inizializzato a [%d] ---|\n", *sh_bff);
 
   //---Creo un mutex
   int sem = semget(sem_key, 1, IPC_CREAT | 0664);
@@ -50,17 +51,22 @@ int main(){
 
   for (int i = 0 ; i < N_PROC ; i++){
     pid = fork();
+
     if (pid < 0){
       perror("Errore FORK");
       _exit(1);
-    }
+    } else
+      printf("[%d] Processo - PID [%d]\n", i, getpid());
     if (pid == 0){
       int min = ricerca_min(vett, (i*N_ELEM));
 
       //---Inizio sezione critica
       wait_sem(sem,0);
+      printf("<--- PIN[%d] Controllo la memoria condivisa --->\n", getpid());
       if (*sh_bff > min){
+        printf("<--- Aggiorno la memoria condivisa --->\n");
         *sh_bff = min;
+        printf("|--- Valore aggiornato - [%d] ---|\n", *sh_bff);
       }
       signal_sem(sem,0);
       //---Fine sezione critica

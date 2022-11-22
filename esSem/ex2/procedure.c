@@ -15,7 +15,7 @@ int ricerca_min(int vector[], int init_pos){
 
 void genera_array(int vector[]){
     srand(time(NULL));
-    for (int i = 0 ; i < N_ELEM ; i++)
+    for (int i = 0 ; i < N_VAL ; i++)
       vector[i] = rand()%100+1;
 }
 
