@@ -1,6 +1,8 @@
+#include <unistd.h>
 #include <errno.h>
+#include <stdio.h>
 
-#include "semahpore.h"
+#include "semaphore.h"
 
 int wait_sem (int id_sem, int num_sem){
   int err;

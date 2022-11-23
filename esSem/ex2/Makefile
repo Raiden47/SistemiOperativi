@@ -14,4 +14,5 @@ procedure.o: procedure.c procedure.h semaphore.h
 
 clean:
 	rm -f *.o
+	rm -f *.gch
 	rm -f ./sem
