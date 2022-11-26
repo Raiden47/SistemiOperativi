@@ -40,10 +40,10 @@ int main () {
 
     if (pid == 0){
       if (i == 0 ){
-        printf("<--- [%d] Sono il produttore e ce l'ho duro --->\n", getpid());
+        printf("<--- [%d] Sono il produttore --->\n", getpid());
         produttore(val, ds_sem);
       } else {
-        printf("<--- [%d] Sono il consumatore e te lo butto a culo --->\n", getpid());
+        printf("<--- [%d] Sono il consumatore --->\n", getpid());
         consumatore(val, ds_sem);
       }
       exit (0);
