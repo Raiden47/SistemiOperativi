@@ -2,6 +2,7 @@
 #define _PROCEDURE_H_
 
 #define DIM_BUFFER 4
+
 #define SPAZIO_DISPONIBILE 0
 #define MESSAGGIO_DISPONIBILE 1
 #define MUTEX_P 2

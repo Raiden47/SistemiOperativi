@@ -1,17 +1,15 @@
-all: start
-
 start: main.o procedure.o semaphore.o
 	gcc -o prodCons main.o procedure.o semaphore.o
 
 main.o: main.c procedure.h semaphore.h
-	gcc -c main.c procedure.h semaphore.h
+	gcc -o main.o -c main.c
 
 procedure.o: procedure.c procedure.h
-	gcc -c procedure.c procedure.h
+	gcc -o procedure.o -c procedure.c
 
 semaphore.o: semaphore.c semaphore.h
-	gcc -c semaphore.c semaphore.h
+	gcc -o semaphore.o -c semaphore.c
 
 clean:
-	rm -fr *.o
-	rm -fr ./prodCons
+	rm -f *.o
+	rm -f ./prodCons

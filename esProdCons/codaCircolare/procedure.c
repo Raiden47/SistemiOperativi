@@ -1,11 +1,14 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <unistd.h>
+#include <errno.h>
+#include <time.h>
 
 #include "procedure.h"
 #include "semaphore.h"
 
 void produttore (struct prodcons *p, int ds_sem){
+  srand (getpid()*time(NULL));
   wait_sem(ds_sem, SPAZIO_DISPONIBILE);
   wait_sem(ds_sem, MUTEX_P);
 
