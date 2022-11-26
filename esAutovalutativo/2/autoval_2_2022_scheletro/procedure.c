@@ -16,9 +16,15 @@ float* leggi_risultati(struct MonitorRisultati * ls) {
 	printf("[%ld] Lettura - ingresso monitor\n", getpid());
 
 	// TODO lettura
+	wait_condition(ls, PRELEVA_OPERANDI);
+
 	wait_condition(ls, PRELEVA_RISULTATO);
 
+	// prelevare il risultato dell'operazione
+
 	signal_condition(ls, PRELEVA_RISULTATO);
+
+	signal_condition(ls, PRELEVA_OPERANDI);
 
 	printf("[%ld] Lettura - uscita monitor\n", getpid());
 
@@ -37,16 +43,28 @@ void inserisci_risultato(struct MonitorRisultati * ls, float valore, int operazi
 
 	printf("[%ld] Scrittura - ingresso monitor\n", getpid());
 
+	// Wait -> printers
+
 	printf("[%ld] Scrittura - valore [%f] operazione %d\n", getpid(),valore, operazione);
+
+	// Signal -> printers
 
 	printf("[%ld] Scrittura - uscita monitor\n", getpid());
 
 	leave_monitor(&(ls->m));
-	
+
 }
 
 void calcolo(struct MonitorRisultati * ls, int operazione, int mailbox){
 	// TODO completa
+	// Wait -> calcolatori
+	// Wait -> generatori
+	// Prelevo operandi
+	// Signal ->generatori
+	// Signal -> calcolatori
+	// svolgo l'operazione
+	// inserisci_risultato(__);
+
 }
 
 void generazione(int operazione, int mailbox) {

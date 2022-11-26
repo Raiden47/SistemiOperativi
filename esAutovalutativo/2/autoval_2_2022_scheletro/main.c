@@ -31,9 +31,7 @@ int main() {
 	init_monitor( &(ls->m), 2 );
 
 	// TODO inizializzare risorse
-	// ls->num_generatori = 0;
-	// ls->num_calcolatori = 0;
-	// ls->num_scrittori = 0;
+
 
 	pid_t pid;
 

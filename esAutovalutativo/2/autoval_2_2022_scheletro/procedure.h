@@ -15,9 +15,7 @@
 struct MonitorRisultati {
 	//TODO riempire struttura
 	int risultati [3];
-	// int num_generatori;
-	// int num_calcolatori;
-	// int num_scrittori;
+	// TODO
 	Monitor m;
 };
 
