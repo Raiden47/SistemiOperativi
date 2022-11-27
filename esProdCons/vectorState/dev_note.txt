@@ -1,0 +1,18 @@
+|_|_|_|_|_|_|_|  <- buffer
+|_|_|_|_|_|_|_|  <- stato
+ 0 1 2 3 4 5 6
+
+- Le info sul buffer le ho tramite lo stato
+
+- Semaforo dei produttori inizializzato a 1;
+  - Ad ogni signal di un consumatore il semaforo
+    si incrementa
+- Semaforo dei consumatori inizializzato a 0;
+  - Ad ogni signal di un produttore il semaforo
+    si incrementa
+
+
+- Controllo sullo stato
+  - Richiedere l'accesso alla risorsa critica
+  - Controllo dello stato
+  
