@@ -7,7 +7,7 @@ main.o: main.c procedure.h semaphore.h
 	gcc -o main.o -c main.c
 
 procedure.o: procedure.c procedure.h
-	gcc -0 procedure.o -c procedure.c
+	gcc -o procedure.o -c procedure.c
 
 semaphore.o: semaphore.c semaphore.h
 	gcc -o semaphore.o -c semaphore.c

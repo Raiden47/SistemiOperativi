@@ -7,6 +7,7 @@
 - Semaforo dei produttori inizializzato a 1;
   - Ad ogni signal di un consumatore il semaforo
     si incrementa
+    
 - Semaforo dei consumatori inizializzato a 0;
   - Ad ogni signal di un produttore il semaforo
     si incrementa
@@ -15,4 +16,3 @@
 - Controllo sullo stato
   - Richiedere l'accesso alla risorsa critica
   - Controllo dello stato
-  
