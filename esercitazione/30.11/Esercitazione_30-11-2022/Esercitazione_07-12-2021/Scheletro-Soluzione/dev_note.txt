@@ -1,6 +1,0 @@
-FIFO
-
-->  |_|_|_|_|_| ->
-
-- Prelievo in testa
-- Inserimento in coda

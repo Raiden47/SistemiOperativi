@@ -30,7 +30,7 @@ void *Preleva(void * s)
 	int i;
 	Elem v1, v2;
 
-    Stack * stack = (Stack *) s;
+  Stack * stack = (Stack *) s;
 
 	for(i=0; i<10; i++) {
 		v1=StackPop(stack);
@@ -61,20 +61,13 @@ int main(int argc, char *argv[])
 	srand(time(NULL));
 
 	// Istanziamo lo stack
-	struct Stack * stk = malloc(sizeof(struct Stack *));
-	pthread_mutex_init(&stk->mutex, null);
-	pthread_cond_init(&stk->cv_prod);
-	pthread_cond_init(&stk->cv_cons);
+	struct Stack * stk = malloc(sizeof(struct Stack));
+	StackInit(stk, 4);
 
-	stk->prod = 1;
-	stk->cons = 0;
-
-
-	//StackInit
 
 	// Attributi thread
 	pthread_attr_init(&attr);
-	pthread_attr_setdetachstate(%attr, PTHREAD_CREATE_JOINABLE);
+	pthread_attr_setdetachstate(&attr, PTHREAD_CREATE_JOINABLE);
 
 	for(i=0; i<5; i++) {
 		// Creazione thread per l'inserimento
@@ -91,16 +84,11 @@ int main(int argc, char *argv[])
 	}
 
 	// Rimozione stack
-	//StackRemove
-
-
 	pthread_attr_destroy(&attr);
-	pthread_mutex_destroy(&stk->mutex);
-	pthread_cond_destroy(&stk->cv_prod);
-	pthread_cond_destroy(&stk->cv_cons);
 
-	free(&stk);
+	StackRemove (stk);
+	free(stk);
 
-	pthread_exit(exit(0));
+	pthread_exit(0);
 
 }
