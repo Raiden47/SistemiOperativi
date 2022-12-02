@@ -3,7 +3,7 @@
 
 #include <sys/sem.h>
 #include <sys/types.h>
-#include sys/ipc.h>
+#include <sys/ipc.h>
 
 #define MUTEXL 0
 #define SYNCH 1

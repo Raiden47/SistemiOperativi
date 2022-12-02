@@ -1,6 +1,9 @@
 #ifndef _PROCEDURE_H_
 #define _PROCEDURE_H_
 
+#define N_LETTORI 5
+#define N_SCRITTORI 5
+
 typedef long msg;
 
 typedef struct {
@@ -8,6 +11,8 @@ typedef struct {
 	msg messaggio;
 }buffer;
 
-void inizio_scrittura 
+void lettore (int, buffer*);
+void scrittore (int, buffer*);
+
 
 #endif //_PROCEDURE_H_
