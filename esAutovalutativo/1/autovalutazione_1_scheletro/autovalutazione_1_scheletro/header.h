@@ -22,6 +22,10 @@ typedef struct{
 } BufferCircolare;
 
 //INSERIRE IDENTIFICATIVI SEMAFORI
+#define SPAZIO_DISPONIBILE 0
+#define MSG_DISPONIBILE_I 1
+#define MSG_DISPONIBILE_II 2
+#define MSG_DISPONIBILE_III 3
 
 
 void Wait_Sem(int, int);

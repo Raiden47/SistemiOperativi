@@ -62,9 +62,9 @@ Elem StackPop(Stack * s) {
 }
 
 int StackSize(Stack * s) {
-	// int size;
-
-	return s->testa;
-
-	// return size;
+	int size;
+	pthread_mutex_lock(&s->mutex);
+	size = s->testa;
+	pthread_mutex_unlock(&s->mutex);
+	return size;
 }
