@@ -5,15 +5,17 @@
 #include <sys/types.h>
 #include <sys/msg.h>
 
-typedef long msg []
+#define MSG_TYPE 1
 
-struct message{
+typedef char msg [40];
+
+struct {
   long type;
-  char text[40];
-}msg;
+  msg text;
+}message;
 
-void produttore();
-void consumatore();
-void print_msg();
+void produttore(int , char * );
+void consumatore(int );
+void print_msg_info(int );
 
 #endif //_PROCEDURE_H_
