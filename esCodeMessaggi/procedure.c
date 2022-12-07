@@ -28,12 +28,12 @@ void consumatore (int queue){
 }
 
 void print_msg_info (int queue){
-  struct msgid_ds msg_id;
+  struct msqid_ds msg_id;
   msgctl(queue, IPC_STAT, &msg_id);
-  char *time_sender(&msg_id.msg_stime);
-  char *time_receiver(&msg_id.msg_rtime);
-  char *time_ctime(&msg_id.msg_ctime);
+  char *time_sender = ctime(&msg_id.msg_stime);
+  char *time_receiver = ctime(&msg_id.msg_rtime);
+  char *time_ctime = ctime(&msg_id.msg_ctime);
 
-  printf("<--- Time Sender --- %s --->\n<--- Time Receiver --- %s --->\n<--- Current Time --- %s --->\n", time_sender, time_receiver, time_ctime);
+  printf("<--- Time Sender : %s --->\n<--- Time Receiver : %s --->\n<--- Current Time : %s --->\n", time_sender, time_receiver, time_ctime);
   printf("<--- Message Number --- %ld --->\n",msg_id.msg_qnum);
 }

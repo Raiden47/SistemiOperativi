@@ -6,10 +6,13 @@
 #include <sys/msg.h>
 
 #define MSG_TYPE 1
+#define N_PROC 2
+#define N_F_CALL 10   //Number function call
+
 
 typedef char msg [40];
 
-struct {
+typedef struct {
   long type;
   msg text;
 }message;
