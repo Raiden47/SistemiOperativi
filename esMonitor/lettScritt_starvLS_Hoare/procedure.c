@@ -14,12 +14,14 @@ void inizio_lettura (struct lettScritt * ls){
   printf("|- [%d] Sono entrato nel monitor -|\n", getpid());
   enter_monitor(&ls->m);
 
-  if (&ls->s_buffer > 0){
+  if (ls->s_buffer > 0){
     wait_condition(&ls->m, CV_LETT);
     printf("... Attendo che gli scrittori lascino il buffer\n");
   }
 
   ls->l_buffer += 1;
+  printf("\t- Incremento il buffer lettori [%d]\n", ls->l_buffer);
+
   signal_condition(&ls->m,CV_LETT);
   leave_monitor(&ls->m);
 }
@@ -27,6 +29,7 @@ void inizio_lettura (struct lettScritt * ls){
 
 void fine_lettura (struct lettScritt * ls){
   enter_monitor(&ls->m);
+  printf("\t- Decremento il buffer lettori [%d]\n", ls->l_buffer);
   ls->l_buffer -= 1;
 
   if (ls->l_buffer == 0){
@@ -42,12 +45,14 @@ void inizio_scrittura (struct lettScritt * ls){
   printf("|- [%d] Sono entrato nel monitor -|\n", getpid());
   enter_monitor(&ls->m);
 
-  if (&ls->l_buffer > 0){
+  if (ls->l_buffer > 0 || ls->s_buffer > 0){
     wait_condition(&ls->m,CV_SCRITT);
     printf("... Attendo che i lettori lascino il buffer\n");
   }
 
   ls->s_buffer += 1;
+  printf("\t- Incremento il buffer scrittori [%d]\n", ls->s_buffer);
+
   signal_condition(&ls->m,CV_SCRITT);
   leave_monitor(&ls->m);
 }
@@ -55,6 +60,8 @@ void inizio_scrittura (struct lettScritt * ls){
 
 void fine_scrittura (struct lettScritt * ls){
   enter_monitor(&ls->m);
+
+  printf("\t- Decremento il buffer scrittori [%d]\n", ls->s_buffer);
   ls->s_buffer -= 1;
 
   if(queue_condition(&ls->m,CV_SCRITT)){

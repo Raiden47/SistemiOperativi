@@ -25,7 +25,7 @@ int main (){
   for (int i = 0 ; i < NUM_SCRITT ; i++){
     pid = fork();
     if (pid == 0){
-      printf("<--- PID [%d] - Sono lo scrittore [%d] --->\n", getpid(), i);
+      printf("<- PID [%d] - Sono lo scrittore [%d] ->\n", getpid(), i);
       srand(getpid()*time(NULL));
       scrittura(ls, genera_numero());
       exit(0);
@@ -35,7 +35,7 @@ int main (){
   for (int i = 0 ; i < NUM_LETT ; i++){
     pid = fork();
     if (pid == 0){
-      printf("<--- PID [%d] - Sono il lettore [%d] --->\n", getpid(), i);
+      printf("<- PID [%d] - Sono il lettore [%d] ->\n", getpid(), i);
       lettura(ls);
       exit(0);
     }
