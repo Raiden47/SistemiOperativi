@@ -9,7 +9,7 @@
 
 float* leggi_risultati(struct MonitorRisultati * ls) {
 
-	float* risultati = //TODO completare 
+	float* risultati = //TODO completare
 
 
 	printf("[%ld] Lettura - ingresso monitor\n", getpid());
@@ -26,7 +26,7 @@ float* leggi_risultati(struct MonitorRisultati * ls) {
 void inserisci_risultato(struct MonitorRisultati * ls, float valore, int operazione) {
 
 	// TODO scrittura
-	
+
 	printf("[%ld] Scrittura - ingresso monitor\n", getpid());
 
 	printf("[%ld] Scrittura - valore [%f] operazione %d\n", getpid(),valore, operazione);
@@ -40,6 +40,10 @@ void calcolo(struct MonitorRisultati * ls, int operazione, int mailbox){
 void generazione(int operazione, int mailbox) {
 	srand(time(NULL));
 	// TODO completa
+	Messaggio msg;
+	msg.operazione = (long)operazione;
+	msg.valore = (float)rand()%20+1;
+	msgsnd(mailbox,(void *)msg,sizeof(Messaggio)-sizeof(long),IPC_NOWAIT);
 }
 void printer(struct MonitorRisultati * ls) {
 	float* risultati;
