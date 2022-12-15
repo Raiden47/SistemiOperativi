@@ -18,10 +18,11 @@ int main () {
       pthread_create(&thread[i], &attr, scrittore, (void *)ls);
     else
       pthread_create(&thread[i], &attr, lettore, (void *)ls);
+    sleep(2);
   }
 
   for (int i = 0 ; i < N_THREAD ; i++)
-    pthread_join(&thread[i], NULL);
+    pthread_join(thread[i], NULL);
 
   pthread_attr_destroy(&attr);
   remove_buffer(ls);

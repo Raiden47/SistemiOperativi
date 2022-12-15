@@ -9,6 +9,8 @@ void init_buffer (struct lettScritt * ls){
 
   ls->num_scritt = 0;
   ls->num_lett = 0;
+  ls->n_w_s = 0;
+  ls->n_w_l = 0;
 }
 
 
@@ -43,8 +45,11 @@ void inizio_lettura (struct lettScritt * ls){ //Tecnicamente nulla garantisce ch
                                                         // - forse ho bisogno di una variabile per sincronizzare l'accesso al mutex
   pthread_mutex_lock(&ls->mutex);
 
-  while(ls->num_scritt > 0)
+  while(ls->num_scritt > 0){
+    ls->n_w_l++;
     pthread_cond_wait(&ls->cv_lett, &ls->mutex);
+    ls->n_w_l--;
+  }
 
   ls->num_lett++;
 
@@ -68,9 +73,11 @@ void fine_lettura (struct lettScritt * ls){
 
 void inizio_scrittura (struct lettScritt * ls){
   pthread_mutex_lock(&ls->mutex);
-  while (ls->num_lett > 0 || ls->num_scritt > 0)
+  while (ls->num_lett > 0 || ls->num_scritt > 0){
+    ls->n_w_s++;
     pthread_cond_wait(&ls->cv_scritt, &ls->mutex);
-
+    ls->n_w_s--;
+  }
   ls->num_scritt++;
 
   pthread_mutex_unlock(&ls->mutex);
@@ -83,8 +90,10 @@ void fine_scrittura (struct lettScritt * ls){
 
   ls->num_scritt--;
 
-  pthread_cond_signal(&ls->cv_scritt);
-  pthread_cond_signal(&ls->cv_lett);
+  if (ls->n_w_s > 1)
+    pthread_cond_signal(&ls->cv_scritt);
+  else
+    pthread_cond_broadcast(&ls->cv_lett);
   pthread_mutex_unlock(&ls->mutex);
 }
 

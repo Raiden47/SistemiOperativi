@@ -16,6 +16,9 @@ struct lettScritt{
   int num_scritt;
   int num_lett;
 
+  int n_w_s;
+  int n_w_l;
+
   pthread_mutex_t mutex;
   pthread_cond_t cv_scritt;
   pthread_cond_t cv_lett;
